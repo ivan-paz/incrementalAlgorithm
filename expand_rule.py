@@ -9,7 +9,7 @@ def expand_rule(rule):
         if type(rule[i]) != list:
             rule[i] = [rule[i]]
     for i in itertools.product(*rule):
-        expanded_rule.append(i)
+        expanded_rule.append(list(i))
     return expanded_rule
 #print(expand_rule(rule))
 

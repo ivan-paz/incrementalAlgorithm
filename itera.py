@@ -1,5 +1,6 @@
+from read_write_clean import *
 from commitNewPattern import *
-from rulex_2 import *
+#from rulex_2 import *
 from optimum_partition_for_Q import optimum_partition
 import json
 from splitR_version1 import * #this script is autocontained
@@ -37,6 +38,8 @@ def expandRule(rule):
             _set = set()
             _set.add(j)
             temp_rule.append(_set)
+        temp_rule.append(rule[-2])
+        temp_rule.append(rule[-1])
         rules.append(temp_rule)
     return rules
 
@@ -54,8 +57,11 @@ def rules_to_presets(rules):
     for rule in rules:
         temporal = []
         for p in rule:
-            for e in p:
-                temporal.append(e)
+            if type(p) == set:
+                for e in p:
+                    temporal.append(e)
+            else:
+                temporal.append(p)
         Presets.append(temporal)
     return Presets
 #---------------------------------------------------
@@ -68,33 +74,63 @@ def rules_to_presets(rules):
 #pattern = (4, 6, 'B')
 
 #Example 1
-pattern = (1,2,'a')
-pattern = (1,4,'a')
-pattern = (5,2,'a')
-pattern = (5,4,'a')
+presets = [ [1,2,'a'], [1,4,'a'] ]
+
+def IntRulex(presets):
+    for preset in presets:
+        pattern = preset   
+
+#Itera
+pattern = [1,2,'a']
 
 all_connected_sets = read('all_connected_sets.json')
-[intersected_sets, indexes_of_intersected_sets] = intersected_connected_sets(pattern,all_connected_sets)
+[intersected_sets, indexes_of_intersected_sets] = intersected_connected_sets(pattern, all_connected_sets)
 print('intersected sets', intersected_sets, 'indexes of intersected sets', indexes_of_intersected_sets)
-intersected_sets = are_there_rules_to_expand(intersected_sets, pattern) # *
-new_set = pattern_plus_intersections(pattern, intersected_sets)
-rulex_format = rulex_format(new_set,1)
-print('new set sent to rulex: ', rulex_format)
+intersected_sets = are_there_rules_to_expand(intersected_sets, pattern)
+print('intersected sets are there rules to expand ', intersected_sets)
+intersections_plus_pattern = pattern_plus_intersections(pattern, intersected_sets)
+for rule in intersections_plus_pattern: rule.append(1) # 1 is the distance factor
+print(intersections_plus_pattern)
 
-#set_for_rulex = expand_rules( rulex_format )
-#print( 'set for rulex', set_for_rulex)
-#Presets = rules_to_presets(set_for_rulex)
-#print('presets : ', Presets)
-#print('this should be the set sent to the rulex: ', set_for_rulex )
-#result = rulexM(Presets,[])
-
+setForRulexNeu = expand_rules( intersections_plus_pattern)
+print( 'set for rulex neu', setForRulexNeu)
+Presets = rules_to_presets(setForRulexNeu)
+strictRules = rulexM(Presets,[])
 
 
-new_set = rulex(rulex_format)
+#strict rules format to tuple format
+def strictRules_Tuple(strictRules):
+    strictRules_TupleFormat = []
+    for rule in strictRules:
+        temporal = []
+        for param in rule:
+            if type(param) == set:
+                if len(param) > 1 :
+                    temporal.append(tuple(param))
+                else:
+                    for i in param:
+                        temporal.append(i)
+            else:
+                temporal.append(param)
+    strictRules_TupleFormat.append(temporal)
+    return strictRules_TupleFormat
+
+new_set =  strictRules_Tuple(strictRules)
+#####new_set = rulex(rulex_format)
+print('the strict rules with Tuple format  ', new_set)
 new_set = eliminateRisk(new_set)
+print('new set without risk', new_set)
+
+#    is it necessary the tuple format or it is possible to use lists     new_set =  [[[1, 5], 2, 'a']]
+
 optimum_partition = optimum_partition(new_set)
 if optimum_partition == False:
     optimum_partition = new_set
+print('optimum partition : ', optimum_partition)
+
+
+
+"""
 #---------------------------------------------
 optimum_partitions = read('optimum_partitions.json')
 optimum_partitions_indexes = read('connected_rules_indexes.json')#they share indexes
@@ -105,7 +141,7 @@ non_intersected = remaining_partitions(optimum_partitions,optimum_partitions_ind
 # The new rule base is optimum_partition(new_set) + non_intersected
 #      if the new pattern does not intersect any set
 # --->  the new rule base is non intersected + new pattern
-def newRuleBase(optimum_partition,non_intersected):
+def newRuleBase(optimum_partition, non_intersected):
     new_rule_base = []
     for rule in optimum_partition:
         new_rule_base.append(rule)
@@ -127,4 +163,4 @@ def write(file_name,data):
 #write('lonly_rules.json',lonly_rules)
 #write('lonly_rules_indexes.json',lonly_rules_indexes)
 #write('connected_rules_indexes.json',connected_rules_indexes)
-
+"""
