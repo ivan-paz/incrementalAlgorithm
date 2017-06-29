@@ -35,6 +35,7 @@ def interval(element):
         minimum = element
         maximum = element
     else:
+        print('minimum maximum de element', element)
         minimum = min(element)
         maximum = max(element)
     #print('min,max',minimum,maximum)
@@ -125,7 +126,7 @@ def intersection_or_possible_rule_formation( new_pattern, rule, risk ):
 #    See if every element of pattern[i] is in rule[i]
 #
 def is_contained(new_pattern_i, rule_i):
-    iscontained = False
+    #iscontained = False
     if type(new_pattern_i) == tuple or type(new_pattern_i) == list:
         set1 = set(new_pattern_i)
     else:

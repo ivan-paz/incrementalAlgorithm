@@ -75,13 +75,16 @@ def rules_to_presets(rules):
 
 #Example 1
 presets = [ [1,2,'a'], [1,4,'a'] ]
-
 def IntRulex(presets):
     for preset in presets:
         pattern = preset   
 
 #Itera
-pattern = [1,2,'a']
+#pattern = [5,2,'a']
+#pattern = [1,2,'a']
+#pattern = [1,4,'a']
+#pattern = [5,4,'a']
+pattern = [2,3,'b']
 
 all_connected_sets = read('all_connected_sets.json')
 [intersected_sets, indexes_of_intersected_sets] = intersected_connected_sets(pattern, all_connected_sets)
@@ -97,7 +100,6 @@ print( 'set for rulex neu', setForRulexNeu)
 Presets = rules_to_presets(setForRulexNeu)
 strictRules = rulexM(Presets,[])
 
-
 #strict rules format to tuple format
 def strictRules_Tuple(strictRules):
     strictRules_TupleFormat = []
@@ -112,7 +114,7 @@ def strictRules_Tuple(strictRules):
                         temporal.append(i)
             else:
                 temporal.append(param)
-    strictRules_TupleFormat.append(temporal)
+        strictRules_TupleFormat.append(temporal)
     return strictRules_TupleFormat
 
 new_set =  strictRules_Tuple(strictRules)
@@ -120,7 +122,6 @@ new_set =  strictRules_Tuple(strictRules)
 print('the strict rules with Tuple format  ', new_set)
 new_set = eliminateRisk(new_set)
 print('new set without risk', new_set)
-
 #    is it necessary the tuple format or it is possible to use lists     new_set =  [[[1, 5], 2, 'a']]
 
 optimum_partition = optimum_partition(new_set)
@@ -129,13 +130,12 @@ if optimum_partition == False:
 print('optimum partition : ', optimum_partition)
 
 
-
-"""
-#---------------------------------------------
+#--------------------------------------------- read
 optimum_partitions = read('optimum_partitions.json')
 optimum_partitions_indexes = read('connected_rules_indexes.json')#they share indexes
 lonly_rules = read('lonly_rules.json')
 lonly_rules_indexes = read('lonly_rules_indexes.json')
+
 non_intersected = remaining_partitions(optimum_partitions,optimum_partitions_indexes,lonly_rules,lonly_rules_indexes,indexes_of_intersected_sets)
 #print(non_intersected)
 # The new rule base is optimum_partition(new_set) + non_intersected
@@ -153,14 +153,13 @@ new_rule_base = newRuleBase(optimum_partition,non_intersected)
 print('New Rule Base : ', new_rule_base)
 
 #   WRITE THE RESULTS INTO json files
-def write(file_name,data):
-    with open(file_name,'w') as f:
-        json.dump(data,f)
-#------------------------------------
+#def write(file_name,data):
+#    with open(file_name,'w') as f:
+#        json.dump(data,f)
+#------------------------------------   write
 #all_connected_sets = extract_connected_sets(new_rule_base)
 #write('all_connected_sets.json', all_connected_sets)
 #[lonly_rules,lonly_rules_indexes,connected_rules,connected_rules_indexes] = connected_and_lonly_rules( all_connected_sets)
 #write('lonly_rules.json',lonly_rules)
 #write('lonly_rules_indexes.json',lonly_rules_indexes)
 #write('connected_rules_indexes.json',connected_rules_indexes)
-"""

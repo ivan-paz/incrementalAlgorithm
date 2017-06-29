@@ -138,7 +138,7 @@ def rulex_for_class(Presets, Rules,  presets_other_classes):
         for i in range(len(Rules)):
             [pattern,b,c] = pattern_found(preset,Rules[i])#is compress OR possible_rule_formation
             if pattern == True:
-                print('create : ', create_rule( preset, Rules[i],presets_other_classes) )
+                #print('create : ', create_rule( preset, Rules[i],presets_other_classes) )
                 Rules.append(create_rule( preset, Rules[i],presets_other_classes))#APPEND RULE
                 Rules.append( preset_into_rule(preset_copy))#APPEND PRESET
         Rules.append(preset_into_rule(preset_copy))#APPEND PRESET
@@ -176,8 +176,8 @@ def rulexM(Presets,Rules):
             else:
                 presets_same_class = dictionary_of_classes[key][0]
                 rules_same_class = dictionary_of_classes[key][1]
-        print('presets same class as',key, presets_same_class)
-        print('key',key, presets_other_classes)
+       #print('presets same class as',key, presets_same_class)
+       #print('key',key, presets_other_classes)
         rules = rulex_for_class(presets_same_class,rules_same_class,presets_other_classes)
         for r in rules:
             if r != None:
