@@ -80,11 +80,11 @@ def IntRulex(presets):
         pattern = preset   
 
 #Itera
-#pattern = [5,2,'a']
+pattern = [5,2,'a']
 #pattern = [1,2,'a']
 #pattern = [1,4,'a']
 #pattern = [5,4,'a']
-pattern = [2,3,'b']
+#pattern = [2,3,'b']
 
 all_connected_sets = read('all_connected_sets.json')
 [intersected_sets, indexes_of_intersected_sets] = intersected_connected_sets(pattern, all_connected_sets)
