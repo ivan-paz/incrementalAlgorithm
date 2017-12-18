@@ -258,29 +258,29 @@ def connected_and_lonly_rules( all_connected_sets ):
             connected_rules_indexes.append(  counter )
     return [ lonly_rules, lonly_rules_indexes, connected_rules, connected_rules_indexes ]
 
-"""
-#-------------------------  TEST  -----------------------
-R = [
-#convex1
-( (1, 2, 3, 8, 11), (4, 6), 'A'),
-(     5,             4,     'B'),
-( (9,12),            5,     'C'),
-#convex2
-( (2,5),             7,     'D'),
-#convex3
-( (12),            (10,13), 'B'),
-( (11,13),          (11,13),'D'),
-#convex4
-(   8,             (10,14), 'A'),
-(  (6,9),            11,    'A')
-]
-all_connected_sets = extract_connected_sets(R)
-            
-[ lonly_rules, connected_rules ] = connected_and_lonly_rules(all_connected_sets)
-print(lonly_rules)
-print(connected_rules)
 
-"""
+#-------------------------  TEST  -----------------------
+#R = [
+##convex1
+#( (1, 2, 3, 8, 11), (4, 6), 'A'),
+#(     5,             4,     'B'),
+#( (9,12),            5,     'C'),
+##convex2
+#( (2,5),             7,     'D'),
+##convex3
+#( (12),            (10,13), 'B'),
+#( (11,13),          (11,13),'D'),
+##convex4
+#(   8,             (10,14), 'A'),
+#(  (6,9),            11,    'A')
+#]
+#
+#all_connected_sets = extract_connected_sets(R)
+#print('all connected sets ',  all_connected_sets)            
+#[ lonly_rules, connected_rules ] = connected_and_lonly_rules(all_connected_sets)
+#print(lonly_rules)
+#print(connected_rules)
+
 
 
 #   Proves to see if the function "intersection" can be used to find possible rules formation
