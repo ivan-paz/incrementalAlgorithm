@@ -133,25 +133,24 @@ def search_intersections(rule, R):
         R.remove(Ri)
     I.append(rule)
     return [I,R]
-"""
-R = [
-(   2,  (1,4), 'A'),
-(   4,  (3,6), 'A'),
-( (4,7),  7,   'A')
-]
-search_intersections(  ((1,4), 3, 'A') ,R)
 
-R = [
-(2,(3,5),'A'),
-(3,(3,5),'A'),
-(4,(3,5),'A'),
-(5,(3,5),'A'),
-(6,(3,5),'A'),
-(7,(3,5),'A')
-]
-search_intersections(((1,8), 4, 'A'), R)
+#R = [
+#(   2,  (1,4), 'A'),
+#(   4,  (3,6), 'A'),
+#( (4,7),  7,   'A')
+#]
+#print(search_intersections(  ((1,4), 3, 'A') ,R) )
+#R = [
+#(2,(3,5),'A'),
+#(3,(3,5),'A'),
+#(4,(3,5),'A'),
+#(5,(3,5),'A'),
+#(6,(3,5),'A'),
+#(7,(3,5),'A')
+#]
+#search_intersections(((1,8), 4, 'A'), R)
 
-"""
+
 
 #Second version of the function ------
 #  returns Q the convex set
