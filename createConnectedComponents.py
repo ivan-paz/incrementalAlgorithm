@@ -7,11 +7,14 @@
 
 #Example1
 ruleSet = [
+        #Component 1
 	[ {1,3},   {3,5},  'A'],
 	[ {2,5},   {4},    'A'],
 	[ {2},     {2,6},  'A'],
+        #Component 2
 	[ {5.5,9}, {1},    'A'],
         [ {7},  {0.5,2.5}, 'A'],
+        #Component 3
         [ {8},     {4.5},  'A']
 ]
 
@@ -45,35 +48,46 @@ def intersection(rule1,rule2):
 #print(intersection([{1,3},{3,5},'A'],[{2,5}, {4}, 'A']) )
 #print(intersection([ {1, 2, 3, 8, 11}, {4, 6},   'A'],[    {5},            {4},     'B']))
 
-
 def createConnectedComponents(ruleSet):
     connectedComponents = [ ]
 
     while ruleSet:
-        intersections = [ ]
         r = ruleSet[0]
         ruleSet.remove(r)
-        intersections.append(r)
+        
+        intersected = [ ]
+        intersected.append(r)
+        I = []
+        I.append(r)
+        
+        while intersected:
+            rule1 = intersected[0]
+            print('comparando r', rule1, 'with the ruleSet',  ruleSet)
 
-        connectedComponent = [ ]
-        while intersections:
-            _r = intersections[0]
-            connectedComponent.append(_r)
-            intersections.remove(_r)
-            #search intersections r in ruleSet
-            print('comparing', _r, 'with the ruleSet',  ruleSet)
-            for i in range(len(ruleSet) - 1):
-                print('comparing', _r, ruleSet[i])
-                if intersection(_r, ruleSet[i]):
+            for i in range( len(ruleSet) - 1 ):
+                rule2 = ruleSet[i]
+                print('comparing', rule1, rule2)
+                if intersection( rule1, rule2 ) and rule1!=rule2:
                     print('intersection')
-                    ruleSet.remove(ruleSet[i])
-                    intersections.append(ruleSet[i])
+                    I.append(rule2)
+            print('I',I)
+            intersected.remove(rule1)
         print('--------------------------------------')
-        print('connected component',connectedComponent)
-        if connectedComponent:
-            connectedComponents.append(connectedComponent)
+        print('connected component', I )
+        subset = False
+        for component in connectedComponents:
+            if all(x in component for x in I):
+                subset = True
+        if subset == False:
+            connectedComponents.append(I)
     [print(i) for i in connectedComponents]
     return connectedComponents
+
+
+
+
+
+
 
 
 
