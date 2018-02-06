@@ -40,6 +40,11 @@ ruleSet = [
 [ {2,5},             {7},     'A']
 ]
 
+#-------------------------------------------------------------
+#                   f u n c t i o n s
+#------------------------------------------------------------
+
+
 # This function finds the minimum and maximum values
 # of a set containing numbers
 # For strings call another function 
