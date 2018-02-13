@@ -16,6 +16,7 @@ def findMinMax(_set):
     minimum = min(_set)
     maximum = max(_set)
     return [minimum,maximum]
+
 # Returns True if rule1 intersects rule2 False otherwise
 def intersection(rule1,rule2):
     intersections = 0
@@ -54,7 +55,7 @@ def searchIntersectionsOrRuleCreation(r, conectedComponent):
 
 #  EXAMPLE 1
 #connectedComponent =	 [	
-#	[{2, 4}, {3, 5}, 'i'],
+#	[{2, 4}, {3, 5}, 'i']
 #        [{6, 7}, {4}, 'i']
 #	]
 #r = [{1},{1},'i']

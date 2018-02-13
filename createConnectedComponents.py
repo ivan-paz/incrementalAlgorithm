@@ -33,19 +33,19 @@
 #]
 
 #Example2
-ruleSet = [
-[ {1, 2, 3, 8, 11}, {4, 6},   'A'],
-[ {9,12},            {5},     'A'],
-[    {5},            {4},     'A'],
-[ {2,5},             {7},     'A']
-]
+#ruleSet = [
+#[ {1, 2, 3, 8, 11}, {4, 6},   'A'],
+#[ {9,12},            {5},     'A'],
+#[    {5},            {4},     'A'],
+#[ {2,5},             {7},     'A']
+#]
 
 
 #Ejemple3
-ruleSet = [
- [{2, 4}, {3, 5}, 'i'],
- [{6, 7}, {4}, 'i']
-]
+#ruleSet = [
+# [{2, 4}, {3, 5}, 'i'],
+# [{6, 7}, {4}, 'i']
+#]
 #-------------------------------------------------------------
 #                   f u n c t i o n s
 #------------------------------------------------------------
@@ -126,5 +126,6 @@ def createConnectedComponents(ruleSet):
     print('final connected components : ')
     [print(i) for i in connectedComponents]
     return connectedComponents
-print('using the following rule set',ruleSet)
-createConnectedComponents(ruleSet)
+
+#print('using the following rule set',ruleSet)
+#createConnectedComponents(ruleSet)
