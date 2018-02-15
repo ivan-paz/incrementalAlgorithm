@@ -54,7 +54,7 @@ def searchIntersectionsOrRuleCreation(r, conectedComponent):
     return intersectionOrRuleCreation
 
 #  EXAMPLE 1
-#connectedComponent =	 [	
+#connectedComponent = [	
 #	[{2, 4}, {3, 5}, 'i']
 #        [{6, 7}, {4}, 'i']
 #	]
