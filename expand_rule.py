@@ -28,3 +28,10 @@ def expandRule(rule):
     return expandedRuleSetFormat
 #print(expandRule(rule))
 
+def oneInstanceRules(affectedComponents):
+    setForRulex = [ ]
+    for affected in affectedComponents:
+        for x in affected:
+            expandedRule = expandRule(x)
+            [setForRulex.append(y) for y in expandedRule]
+    return setForRulex
