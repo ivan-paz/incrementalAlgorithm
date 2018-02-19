@@ -24,31 +24,34 @@ heuristic = 1
 #--------------------------------------
 
 def commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic):
-    affectedComponents = []
-    indexesOfAffectedComponents = []
-    setForRulex = []
+    affectedComponents = [ ]
+    indexesOfAffectedComponents = [ ]
+    setForRulex = [ ]
     index = -1
 
     connectedComponents = createConnectedComponents(ruleSet)#1
+    rule = preset_into_rule(preset) 
+
     for connectedComponent in connectedComponents:
         index += 1
-        print('connectedComponent : ', connectedComponent)
-        r = preset_into_rule(preset)
-        intersectionsOrRuleCreation = searchIntersectionsOrRuleCreation(r,connectedComponent)#2
+        intersectionsOrRuleCreation = searchIntersectionsOrRuleCreation(rule,connectedComponent)#2
         print(intersectionsOrRuleCreation)
         if intersectionsOrRuleCreation:
             affectedComponents.append(connectedComponent)
             indexesOfAffectedComponents.append(index)
+
     print('connectedComponents : ', connectedComponents)
-    print('the affected components are : ', affectedComponents,'indexes of affected components', indexesOfAffectedComponents)
+    print('the affected components are : ', affectedComponents)
+    print('indexes of affected components', indexesOfAffectedComponents)
+    #Prepare set for rulex
     for affected in affectedComponents:
         for x in affected:
             expandedRule = expandRule(x)
             [setForRulex.append(y) for y in expandedRule]
     print('set for rulex', setForRulex)
     print('preset : ', preset)
-    newSet = rulexMaxCompress([preset],setForRulex,d,False)
-    print('newSet de los affected components', newSet)
+    newSet = rulexMaxCompress([preset],setForRulex,d,deleteEveryIteration)#3
+    print('newSet de los affected components',newSet)
 
 
 commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic)
