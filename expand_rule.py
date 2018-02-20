@@ -35,3 +35,17 @@ def oneInstanceRules(affectedComponents):
             expandedRule = expandRule(x)
             [setForRulex.append(y) for y in expandedRule]
     return setForRulex
+
+def prepareRulesForRulex(affectedComponents, expandRules):
+    setForRulex = [ ]
+    if expandRules == True:
+        setForRulex = oneInstanceRules(affectedComponents)
+        return setForRulex
+    else:
+        for affected in affectedComponents:
+            [setForRulex.append(y) for x in affected for y in x]
+            return [setForRulex]
+#affectedComponents=  [[[{2, 4}, {3, 5}, 'i']], [[{6, 7}, {4}, 'i']]]
+#print(prepareRulesForRulex(affectedComponents,False))
+#print('fux34aoqne ')
+#print(prepareRulesForRulex(affectedComponents,True))

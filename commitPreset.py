@@ -7,7 +7,7 @@
 from createConnectedComponents import createConnectedComponents
 from searchIntersectionsOrRuleCreation import searchIntersectionsOrRuleCreation
 from rulexMaximumCompressionRun import rulexMaxCompress
-from expand_rule import oneInstanceRules
+from expand_rule import prepareRulesForRulex
 from rulexForClass import preset_into_rule
 
 #Ejemple3    ---------  this has to be in rules.json
@@ -21,9 +21,10 @@ preset = [3,4,'i']
 d = 1
 deleteEveryIteration = False
 heuristic = 1
+expandRules = True
 #--------------------------------------
 
-def commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic):
+def commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic,expandRules=True):
     affectedComponents = [ ]
     indexesOfAffectedComponents = [ ]
     #setForRulex = [ ]
@@ -48,11 +49,11 @@ def commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic):
     #    for x in affected:
     #        expandedRule = expandRule(x)
     #        [setForRulex.append(y) for y in expandedRule]
-    setForRulex = oneInstanceRules(affectedComponents)
+    setForRulex = prepareRulesForRulex(affectedComponents, expandRules)
     print('set for rulex', setForRulex)
     print('preset : ', preset)
     newSet = rulexMaxCompress([preset],setForRulex,d,deleteEveryIteration)#3
     print('newSet de los affected components',newSet)
 
 
-commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic)
+commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic,expandRules)
