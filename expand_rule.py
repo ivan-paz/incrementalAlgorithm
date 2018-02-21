@@ -36,9 +36,9 @@ def oneInstanceRules(affectedComponents):
             [setForRulex.append(y) for y in expandedRule]
     return setForRulex
 
-def prepareRulesForRulex(affectedComponents, expandRules):
+def prepareRulesForRulex(affectedComponents, splitRules):
     setForRulex = [ ]
-    if expandRules == True:
+    if splitRules == True:
         setForRulex = oneInstanceRules(affectedComponents)
         return setForRulex
     else:

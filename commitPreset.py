@@ -19,12 +19,11 @@ ruleSet = [
 #    This has to be in configuration.py
 preset = [3,4,'i']
 d = 1
-deleteEveryIteration = False
 heuristic = 1
-expandRules = True
+splitRules = True
 #--------------------------------------
 
-def commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic,expandRules=True):
+def commitPreset(preset,ruleSet,d,heuristic,splitRules):
     affectedComponents = [ ]
     indexesOfAffectedComponents = [ ]
     #setForRulex = [ ]
@@ -49,11 +48,11 @@ def commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic,expandRules=Tru
     #    for x in affected:
     #        expandedRule = expandRule(x)
     #        [setForRulex.append(y) for y in expandedRule]
-    setForRulex = prepareRulesForRulex(affectedComponents, expandRules)
+    setForRulex = prepareRulesForRulex(affectedComponents, splitRules)
     print('set for rulex', setForRulex)
     print('preset : ', preset)
-    newSet = rulexMaxCompress([preset],setForRulex,d,deleteEveryIteration)#3
+    newSet = rulexMaxCompress([preset],setForRulex,d,False)#3
     print('newSet de los affected components',newSet)
 
 
-commitPreset(preset,ruleSet,d,deleteEveryIteration,heuristic,expandRules)
+commitPreset(preset,ruleSet,d,heuristic,splitRules)
