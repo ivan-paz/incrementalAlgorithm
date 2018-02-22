@@ -88,18 +88,18 @@ def createConnectedComponents(ruleSet):
         
         while intersected:
             rule1 = intersected[0]
-            print('comparando r', rule1, 'with the ruleSet',  ruleSet)
+#            print('comparando r', rule1, 'with the ruleSet',  ruleSet)
 
             for i in range( len(ruleSet) - 1 ):
                 rule2 = ruleSet[i]
-                print('comparing', rule1, rule2)
+#                print('comparing', rule1, rule2)
                 if intersection( rule1, rule2 ) and rule1!=rule2:
-                    print('intersection')
+#                    print('intersection')
                     connectedComponent.append(rule2)
-            print('connectedComponent',connectedComponent)
+#            print('connectedComponent',connectedComponent)
             intersected.remove(rule1)
-        print('--------------------------------------')
-        print('connected component', connectedComponent )
+#        print('--------------------------------------')
+#        print('connected component', connectedComponent )
         subset = False
         for element in connectedComponents:
             #si al menos uno esta en el componente anterior agrega las que no estan FALTA*********
@@ -118,13 +118,13 @@ def createConnectedComponents(ruleSet):
         #is_subset=False
         for component2 in connectedComponents:
             if component1 != component2 and all(x in component2 for x in component1):
-                print('this list is a subset', component1)
+#                print('this list is a subset', component1)
                 connectedComponents.remove(component1)
                 #is_subset = True
             #elif component1 not in finalConnectedComponents and is_subset == False:
              #   finalConnectedComponents.append(component1)
-    print('final connected components : ')
-    [print(i) for i in connectedComponents]
+#    print('final connected components : ')
+#    [print(i) for i in connectedComponents]
     return connectedComponents
 
 #print('using the following rule set',ruleSet)

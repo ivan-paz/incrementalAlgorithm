@@ -10,12 +10,13 @@ from rulexMaximumCompressionRun import rulexMaxCompress
 from expand_rule import prepareRulesForRulex
 from rulexForClass import preset_into_rule
 
-#Ejemple3    ---------  this has to be in rules.json
+
+#Ejemple3
+#    i  n  p  u  t    d  a  t  a -------  this has to be in rules.json or something lile that.
 ruleSet = [
  [{2, 4}, {3, 5}, 'i'],
  [{6, 7}, {4}, 'i']
 ]
-
 #    This has to be in configuration.py
 preset = [3,4,'i']
 d = 1
@@ -29,8 +30,8 @@ def commitPreset(preset,ruleSet,d,heuristic,splitRules):
     #setForRulex = [ ]
     index = -1
 
-    connectedComponents = createConnectedComponents(ruleSet)#1
-    rule = preset_into_rule(preset) 
+    connectedComponents = createConnectedComponents(ruleSet) ;print('connected Components:');[print(x) for x in connectedComponents]#1
+    rule = preset_into_rule(preset) #1.1 
 
     for connectedComponent in connectedComponents:
         index += 1
@@ -41,6 +42,7 @@ def commitPreset(preset,ruleSet,d,heuristic,splitRules):
             indexesOfAffectedComponents.append(index)
 
     print('connectedComponents : ', connectedComponents)
+    print('preset', preset)
     print('the affected components are : ', affectedComponents)
     print('indexes of affected components', indexesOfAffectedComponents)
     #Prepare set for rulex
@@ -53,6 +55,5 @@ def commitPreset(preset,ruleSet,d,heuristic,splitRules):
     print('preset : ', preset)
     newSet = rulexMaxCompress([preset],setForRulex,d,False)#3
     print('newSet de los affected components',newSet)
-
 
 commitPreset(preset,ruleSet,d,heuristic,splitRules)

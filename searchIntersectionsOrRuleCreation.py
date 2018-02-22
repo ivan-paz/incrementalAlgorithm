@@ -45,11 +45,11 @@ def searchIntersectionsOrRuleCreation(r, conectedComponent):
     for ri in conectedComponent:
         if intersection(r,ri):
             intersectionOrRuleCreation = True
-            print('intersection')
+#            print('intersection')
             return intersectionOrRuleCreation
         if ruleCreation(r,ri):
             intersectionOrRuleCreation = True
-            print('rule Creation')
+#            print('rule Creation')
             return intersectionOrRuleCreation
     return intersectionOrRuleCreation
 
