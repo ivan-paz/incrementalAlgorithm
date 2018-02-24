@@ -19,7 +19,7 @@ def expandRule(rule):
     for i in itertools.product(*rule):
         expandedRule.append(i)
     for i in expandedRule:
-        print('expandiendo', i)
+#        print('expandiendo', i)
         tempRule = []
         for j in range(len(rule)-1):
             tempRule.append(set([i[j]]))

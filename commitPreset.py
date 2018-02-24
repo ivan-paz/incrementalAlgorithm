@@ -9,7 +9,7 @@ from searchIntersectionsOrRuleCreation import searchIntersectionsOrRuleCreation
 from rulexMaximumCompressionRun import rulexMaxCompress
 from expand_rule import prepareRulesForRulex
 from rulexForClass import preset_into_rule
-
+from createIntervalRules import createIntervalRules
 
 #Ejemple3
 #    i  n  p  u  t    d  a  t  a -------  this has to be in rules.json or something lile that.
@@ -30,13 +30,13 @@ def commitPreset(preset,ruleSet,d,heuristic,splitRules):
     #setForRulex = [ ]
     index = -1
 
-    connectedComponents = createConnectedComponents(ruleSet) ;print('connected Components:');[print(x) for x in connectedComponents]#1
+    connectedComponents = createConnectedComponents(ruleSet)#1
     rule = preset_into_rule(preset) #1.1 
 
     for connectedComponent in connectedComponents:
         index += 1
         intersectionsOrRuleCreation = searchIntersectionsOrRuleCreation(rule,connectedComponent)#2
-        print(intersectionsOrRuleCreation)
+#        print(intersectionsOrRuleCreation)
         if intersectionsOrRuleCreation:
             affectedComponents.append(connectedComponent)
             indexesOfAffectedComponents.append(index)
@@ -52,8 +52,11 @@ def commitPreset(preset,ruleSet,d,heuristic,splitRules):
     #        [setForRulex.append(y) for y in expandedRule]
     setForRulex = prepareRulesForRulex(affectedComponents, splitRules)
     print('set for rulex', setForRulex)
-    print('preset : ', preset)
     newSet = rulexMaxCompress([preset],setForRulex,d,False)#3
     print('newSet de los affected components',newSet)
+    intervalRules = createIntervalRules(newSet,heuristic)
+
+
+
 
 commitPreset(preset,ruleSet,d,heuristic,splitRules)
