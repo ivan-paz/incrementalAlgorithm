@@ -4,56 +4,63 @@ Created on Fri Mar 17 16:25:56 2017
 
 @author: ivan
 """
-from adjacent_matrix import *
+#from adjacent_matrix import *
 #from create_partitions_from_connected_component import *
-from function_to_create_subsets import *
-from create_rules import *
-from functions_to_calculate_the_volume_of_a_partition import *
+#from function_to_create_subsets import *
+from create_rules import partitions
+#from functions_to_calculate_the_volume_of_a_partition import *
 #from intersection_of_rules import *
-from generate_edges import *
+#from generate_edges import *
 
 def exclude_current_edge(edge,edges):
     temp = copy.deepcopy(edges)
     temp.remove(edge)
     return temp
-"""
-Q = [
-        ( (1,2,3,8,11), (4,6), 'A'),
-        (       (9,12),     5, 'C'),
-        (            5,     4,'B')    
-    ]
-""" 
-    
-def cut(Q):
-   # print('Connected_set to break tree-like :', Q)
-    matrix = adjacent_matrix(Q)
-    #print('Matrix', matrix)
-    edges = generate_edges(matrix)
-    edges = simplify_edges(edges)
-   # print('Edges', edges)
 
-    for i in range(len(edges)): edges[i] = sorted(edges[i])
-    edges = sorted(edges, key = operator.itemgetter(1))
-  
-    P = [ ]
-    for edge in edges:
-        #print('breaking', edge)
-        temp_P = [ ]
-        #print( Q[ int(edge[0]) ], Q[ int(edge[1]) ] )
-        temp_P = temp_P + partitions( Q[ int(edge[0]) ], Q[ int(edge[1]) ]  )
-        #print(temp_P)
-        clone_Q = copy.deepcopy(Q)
-        clone_Q.remove(Q[int(edge[0])])
-        clone_Q.remove(Q[int(edge[1])])
-        #print('clone_Q', clone_Q)
-        
-        for p in temp_P:
-            for x in clone_Q:
-                p.append(x)
-            #print('p: ',p)
-            P.append(p) #########  Eliminate levels Rompe la herarquia
-    return P
-#   P = cut(Q)
+#rulexOutput  = [
+#[ {1, 2, 3, 8, 11}, {4, 6}, 'A'],
+#[ {9,12},           {5},    'C'],
+#[ {   5},           {4},    'B'],
+#[ {2, 5},           {7},    'D']
+#]
+#contradictions = [[1, 0], [2, 0]]
+
+#   antes cut    
+def createSolutionSpace(contradictions,rulexOutput):
+    print('Connected_set to break tree-like :', contradictions)
+    #matrix = createAdjacentMatrix(Q)
+    #print('Matrix', matrix)
+    #edges = generate_edges(matrix)
+    #edges = simplify_edges(edges)
+    #print('Edges', edges)
+    for i in range(len(contradictions)): contradictions[i] = sorted(contradictions[i]);print(contradictions[i])
+        #contradictions = sorted(contradictions, key = operator.itemgetter(1))
+ 
+    partitions = [ ]
+    for edge in contradictions:
+        print('breaking union', edge)
+        temp_partitions = [ ]
+        print( rulexOutput[ edge[0] ], rulexOutput[ edge[1] ] )
+        r1 = rulexOutput[ edge[0] ]
+        r2 = rulexOutput[ edge[1] ]
+        print(r1,type(r1))
+        print(r2,type(r2))
+        print( partitions( [{1,3},{1},'A'], [{2},{1},'B'] )    )
+        #temp_partitions = temp_partitions + partitions( rulexOutput[edge[0]], rulexOutput[edge[1]] )
+        #print(temp_partitions)
+#        clone_Q = copy.deepcopy(Q)
+#        clone_Q.remove(Q[int(edge[0])])
+#        clone_Q.remove(Q[int(edge[1])])
+#        #print('clone_Q', clone_Q)
+#        
+#        for p in temp_P:
+#            for x in clone_Q:
+#                p.append(x)
+#            #print('p: ',p)
+#            P.append(p) #########  Eliminate levels Rompe la herarquia
+#    return P
+#P = createSolutionSpace(contradictions)
+
 
 """
 Q = [

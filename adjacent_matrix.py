@@ -34,12 +34,12 @@ from searchIntersectionsOrRuleCreation import intersection
 def createAdjacentMatrix(setRules):
     graph = {}
     for i in range(len(setRules)):
-        graph[str(i)] = [ ]
+        graph[i] = [ ] #æqui
         for j in range(len(setRules)):
             if (i!=j) and intersection(setRules[i],setRules[j])==True and setRules[i][-1]!=setRules[j][-1]:
-                old = graph[str(i)]
+                old = graph[i] #aqui
                 new = old + [j] # before str(j)  BUT now I have the NUMBERS
-                graph[str(i)] = new
+                graph[i] = new  #aqui
 #    print(graph)
     return graph
 #print( adjacentMatrix( [ [{6, 9}, {11}, 'A'], [{8}, {10, 14}, 'B'] ] )  )

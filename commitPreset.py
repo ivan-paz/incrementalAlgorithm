@@ -52,10 +52,9 @@ def commitPreset(preset,ruleSet,d,heuristic,splitRules):
     #        [setForRulex.append(y) for y in expandedRule]
     setForRulex = prepareRulesForRulex(affectedComponents, splitRules)
     print('set for rulex', setForRulex)
-    newSet = rulexMaxCompress([preset],setForRulex,d,False)#3
-    print('newSet de los affected components',newSet)
-    intervalRules = createIntervalRules(newSet,heuristic)
-
+    rulexOutput = rulexMaxCompress([preset],setForRulex,d,False)#3
+    print('rulexOutput de los affected components',rulexOutput)
+#    intervalRules = createIntervalRules(rulexOutput,heuristic)
 
 
 

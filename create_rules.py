@@ -49,19 +49,21 @@ def rules_form_subsets(subsets, i, R1, R2):
     return rules
 #rules_form_subsets([[1, 2, 3], 0, [5], 1, [8, 11], 0], 0, R1, R2)
 
-partitions = [[[(1, 2, 3, 8), {4, 6}, 'A'], [(9,), {5}, 'C'], [(11,), {4, 6}, 'A'], [(12,), {5}, 'C']], [[{8, 11, 2, 3, 1}, (4,), 'A'], [{9, 12}, (5,), 'C'], [{8, 11, 2, 3, 1}, (6,), 'A']]]
-def convertEntriesToSets(partitions):
+#   E   X   A   M   P   L   E
+#partitions = [[[(1, 2, 3, 8), {4, 6}, 'A'], [(9,), {5}, 'C'], [(11,), {4, 6}, 'A'], [(12,), {5}, 'C']], [[{8, 11, 2, 3, 1}, (4,), 'A'], [{9, 12}, (5,), 'C'], [{8, 11, 2, 3, 1}, (6,), 'A']]]
+
+def convertRulesEntriesToSets(partitions):
     partitionsWithSets = []    
     for partition in partitions:
+        localPartition = [ ]
         for rule in partition:
             for p in range(len(rule) -1 ):
-                print(rule[p], type(rule[p]))
+#                print(rule[p], type(rule[p]))
                 if type(rule[p])!=set:
-                    rule[p] = set(rule[p]); print(rule[p])
-            partitionsWithSets.append(rule)
+                    rule[p] = set(rule[p]); #print(rule[p])
+            localPartition.append(rule)
+        partitionsWithSets.append(localPartition)
     return partitionsWithSets
-print(convertEntriesToSets(partitions))
-
 
 def partitions(R1, R2):
     partitions = [ ]
@@ -72,6 +74,7 @@ def partitions(R1, R2):
                 subsets = create_subsets(R1[i],R2[i])
                 rules = rules_form_subsets(subsets, i, R1, R2)
                 partitions = partitions + [rules]
+        partitions = convertRulesEntriesToSets(partitions)#######
         return partitions
     else:
         return False
@@ -86,4 +89,10 @@ def partitions(R1, R2):
 #R1 = [{9,12}, {5}, 'C']
 #R2 = [ {1,2,3,8,11}, {4,6}, 'A' ]
 #print(partitions( R1, R2 ))
+
+#r1= [{8, 3, 2, 11, 1}, {4, 6}, 'A']
+#r2= [{9, 12}, {5}, 'C']
+#print(partitions(r1,r2))
+
+print( partitions( [{1,3},{1},'A'], [{2},{1},'B'] )    )
 

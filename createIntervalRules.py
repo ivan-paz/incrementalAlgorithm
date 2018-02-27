@@ -1,10 +1,10 @@
 #_*_ coding: utf-8 _*_
 from adjacent_matrix import createAdjacentMatrix
 from generate_edges import * 
-
+from break_edges import createSolutionSpace
 #newSet = [[{2, 4}, {3, 5}, 'i'], [{3, 6, 7}, {4}, 'i']]
 
-R = [
+rulexOutput = [
 [ {1, 2, 3, 8, 11}, {4, 6}, 'A'],
 [ {9,12},           {5},    'C'],
 [ {   5},           {4},    'B'],
@@ -17,7 +17,11 @@ def identifyContradictions(rulexOutput):
     simplifiedEdges = simplify_edges(edges)
     #print('simplifiedEdges: ', simplifiedEdges)
     return simplifiedEdges
+
+#def separateRulesToCreatePartitions(simplifiedEdges,rulexOutput):
+#    rulesToCreatePartitions = []
     
+
 def createIntervalRules(rulexOutput,heuristic):
     #build the adjacent matrix
     #adjacentMatrix = createAdjacentMatrix(rulexOutput)
@@ -28,5 +32,6 @@ def createIntervalRules(rulexOutput,heuristic):
     #print('simplified edges : ', simplifiedEdges)
     contradictions = identifyContradictions(rulexOutput)
     print(contradictions)
+    solutionSpace = createSolutionSpace(contradictions,rulexOutput)
 
-createIntervalRules(R,1)
+createIntervalRules(rulexOutput,1)
