@@ -33,5 +33,5 @@ def createIntervalRules(rulexOutput,heuristic):
     contradictions = identifyContradictions(rulexOutput)
     print(contradictions)
     solutionSpace = createSolutionSpace(contradictions,rulexOutput)
-
+    [print(x,"\n") for x in solutionSpace]
 createIntervalRules(rulexOutput,1)

@@ -4,26 +4,51 @@ Created on Fri Mar 17 16:25:56 2017
 
 @author: ivan
 """
-#from adjacent_matrix import *
+import copy
+from adjacent_matrix import createAdjacentMatrix
 #from create_partitions_from_connected_component import *
 #from function_to_create_subsets import *
 from create_rules import partitions
 #from functions_to_calculate_the_volume_of_a_partition import *
 #from intersection_of_rules import *
-#from generate_edges import *
+from generate_edges import *
+
 
 def exclude_current_edge(edge,edges):
     temp = copy.deepcopy(edges)
     temp.remove(edge)
     return temp
 
-#rulexOutput  = [
-#[ {1, 2, 3, 8, 11}, {4, 6}, 'A'],
-#[ {9,12},           {5},    'C'],
-#[ {   5},           {4},    'B'],
-#[ {2, 5},           {7},    'D']
-#]
+
+def identifyContradictions(rulexOutput):
+    adjacentMatrix = createAdjacentMatrix(rulexOutput)
+    edges = generate_edges(adjacentMatrix)
+    simplifiedEdges = simplify_edges(edges)
+    #print('simplifiedEdges: ', simplifiedEdges)
+    return simplifiedEdges
+
+rulexOutput  = [
+[ {1, 2, 3, 8, 11}, {4, 6}, 'A'],
+[ {9,12},           {5},    'C'],
+[ {   5},           {4},    'B'],
+[ {2, 5},           {7},    'D']
+]
 #contradictions = [[1, 0], [2, 0]]
+def createPartitionsTree(rulexOutput):
+    intersections = True
+    while intersections == True:
+        intersections = False
+        contradictions = identifyContradictions(rulexOutput)
+        for i in range(len(contradictions)): contradictions[i] = sorted(contradictions[i])
+        for edge in contradictions:
+           branch = []
+           pieces  = partitions(rulexOutput[edge[0]],rulexOutput[edge[1]])
+           [branch.append(p) for p in pieces]
+    print(branch)
+createPartitionsTree(rulexOutput)
+
+
+
 
 #   antes cut    
 def createSolutionSpace(contradictions,rulexOutput):
@@ -33,33 +58,32 @@ def createSolutionSpace(contradictions,rulexOutput):
     #edges = generate_edges(matrix)
     #edges = simplify_edges(edges)
     #print('Edges', edges)
-    for i in range(len(contradictions)): contradictions[i] = sorted(contradictions[i]);print(contradictions[i])
+    for i in range(len(contradictions)): contradictions[i] = sorted(contradictions[i])
         #contradictions = sorted(contradictions, key = operator.itemgetter(1))
- 
-    partitions = [ ]
+    solutionSpace = [ ]
     for edge in contradictions:
-        print('breaking union', edge)
+        #print('breaking union', edge)
         temp_partitions = [ ]
-        print( rulexOutput[ edge[0] ], rulexOutput[ edge[1] ] )
+#        print( rulexOutput[ edge[0] ], rulexOutput[ edge[1] ] )
+#        print(partitions(rulexOutput[edge[0]],rulexOutput[edge[1]]))
         r1 = rulexOutput[ edge[0] ]
         r2 = rulexOutput[ edge[1] ]
-        print(r1,type(r1))
-        print(r2,type(r2))
-        print( partitions( [{1,3},{1},'A'], [{2},{1},'B'] )    )
+        print(partitions(r1,r2))
         #temp_partitions = temp_partitions + partitions( rulexOutput[edge[0]], rulexOutput[edge[1]] )
         #print(temp_partitions)
-#        clone_Q = copy.deepcopy(Q)
-#        clone_Q.remove(Q[int(edge[0])])
-#        clone_Q.remove(Q[int(edge[1])])
-#        #print('clone_Q', clone_Q)
-#        
-#        for p in temp_P:
-#            for x in clone_Q:
-#                p.append(x)
-#            #print('p: ',p)
-#            P.append(p) #########  Eliminate levels Rompe la herarquia
-#    return P
-#P = createSolutionSpace(contradictions)
+        #clone_rulexOutput = copy.deepcopy(rulexOutput)
+        #clone_rulexOutput.remove(rulexOutput[edge[0]])
+        #clone_rulexOutput.remove(rulexOutput[edge[1]])
+        #print('clone_rulexOutput', clone_rulexOutput)
+        
+        #for p in temp_partitions:
+        #    for x in clone_rulexOutput:
+        #        p.append(x)
+            #print('p: ',p)
+        #solutionSpace.append(temp_partitions) #########  Eliminate levels Rompe la herarquia
+    return solutionSpace
+#print( createSolutionSpace(contradictions,rulexOutput) )
+#print( partitions( [{1,3},{1},'A'],[{2},{1},'B']) )
 
 
 """

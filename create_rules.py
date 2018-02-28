@@ -69,7 +69,7 @@ def partitions(R1, R2):
     partitions = [ ]
     if R1[-1] != R2[-1]:
         for i in range(len(R1) - 1 ):
-            #print(R1[i],R2[i])
+#            print(R1[i],R2[i])
             if condition(R1[i],R2[i]) == False:
                 subsets = create_subsets(R1[i],R2[i])
                 rules = rules_form_subsets(subsets, i, R1, R2)
@@ -94,5 +94,5 @@ def partitions(R1, R2):
 #r2= [{9, 12}, {5}, 'C']
 #print(partitions(r1,r2))
 
-print( partitions( [{1,3},{1},'A'], [{2},{1},'B'] )    )
+#print( partitions( [{1,3},{1},'A'], [{2},{1},'B'] )    )
 
