@@ -65,8 +65,7 @@ def searchIntersectionsOrRuleCreation(r, conectedComponent):
 #r = [{2},{1},'i']
 #r = [{10},{5},'i']
 #print(searchIntersectionsOrRuleCreation(r,connectedComponent))
-
-
+#
 
 
 
